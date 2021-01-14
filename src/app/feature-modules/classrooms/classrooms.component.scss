@@ -1,0 +1,23 @@
+table{
+    width: 100%;
+}
+
+.topsection{
+    margin-top: 16px;
+}
+
+.table-row-link{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.table-row{
+    transform: scale(1);    //litle hack: https://stackoverflow.com/questions/8501727/table-row-wont-contain-elements-with-positionabsolute
+}
+
+.table-row:hover{
+    background-color: lightgrey;
+}

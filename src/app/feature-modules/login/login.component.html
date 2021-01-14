@@ -1,10 +1,10 @@
 
 <section class="container">
   <div class="login-box"> 
-    <form [formGroup]="form" (ngSubmit)="submitForm()" class="login-form">
+    <form [formGroup]="form" (ngSubmit)="login()" class="login-form">
       <mat-form-field class="full-width">
           <mat-label>Email</mat-label>
-          <input type="email" matInput placeholder="example@example.com" value="" formControlName="email" [errorStateMatcher]="matcher">
+          <input type="email" matInput placeholder="example@example.com" value="" formControlName="email">
           <mat-error *ngIf="form.controls.email.hasError('email') && !form.controls.email.hasError('required')">
             Please enter a valid email address
           </mat-error>
@@ -12,18 +12,20 @@
             Email is <strong>required</strong>
           </mat-error>
       </mat-form-field>
-      <div style="height: 8px" *ngIf="matcher.isErrorState(form.controls.email, form)"></div>
+      <div style="height: 8px" ></div>
       
       <mat-form-field class="full-width">
           <mat-label>Password</mat-label>
-          <input type="password" matInput placeholder="" value="" formControlName="password" [errorStateMatcher]="matcher">
+          <input type="password" matInput placeholder="" value="" formControlName="password">
           <mat-error *ngIf="form.controls.password.hasError('required')">
             Password is <strong>required</strong>
           </mat-error>
       </mat-form-field>
-
-      <button [disabled]="!form.valid" type="submit" class="login-button" mat-raised-button>Login</button>
       
+
+      <mat-error *ngIf="errorMessage">{{errorMessage}}</mat-error>
+      <button [disabled]="!form.valid || showSpinner == true" type="submit" class="login-button" mat-raised-button>Login</button>
+      <mat-spinner *ngIf="showSpinner == true" [diameter]="36"></mat-spinner>
     </form>
   </div>
 </section>

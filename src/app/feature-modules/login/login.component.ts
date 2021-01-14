@@ -6,24 +6,12 @@ import { SessionService } from 'src/app/core/services/session.service';
 
 
 
-//I think this is the default behaviour so I don't really need this unless I call it specifically in the .html(which I am doing atm)
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-    //return true;
-  }
-}
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  matcher = new MyErrorStateMatcher();
 
   form: FormGroup = new FormGroup({
     email: new FormControl('', [
@@ -51,30 +39,32 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this._sessionService.isLoggedIn()){
+      this._router.navigate(['/classrooms']);
+    }
   }
 
 
 
 
   
-  errorMessage: string | null = null;
+  errorMessage: string = null;
   showSpinner: boolean = false;
   async login(): Promise<void>{
     if (this.form.valid) {
       // let dialog = this.openGenericDialog();
       this.errorMessage = null;
       this.showSpinner = true;
-      let success: boolean | null = false;
+      let success: boolean = false;
       try {
         success = await this._sessionService.login(this.form.value.email, this.form.value.password);
       } catch (error) {
         success = null; //if the request to ids fails, it will cause an exception
       }
-      
       this.showSpinner = false;
       // dialog.close();
       if(success){
-        this._router.navigate(['/class']);
+        this._router.navigate(['/classrooms']);
       }
       else if(success === null){
         this.errorMessage = "Something went wrong. Try again later.";

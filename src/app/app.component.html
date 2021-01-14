@@ -1,2 +1,19 @@
-<header class="container"><h1 class="main-title">pcloud</h1></header>
+<header class="container">
+    <h1><a routerLink="/" class="main-title">pcloud</a></h1>
+    <button *ngIf="currentPage != '/login'" (click)="logout()" type="button" class="logout-button" mat-raised-button>Logout</button>
+    <nav *ngIf="currentPage != '/login'" mat-tab-nav-bar [backgroundColor]="background">
+        <!-- <a mat-tab-link *ngFor="let link of links"
+            (click)="activeLink = link"
+            [active]="activeLink == link"> {{link}} </a> -->
+        <a mat-tab-link 
+            routerLink="/classrooms"
+            [active]="currentPage == '/classrooms'"> Classrooms </a>
+        <a mat-tab-link 
+            routerLink="/problems"
+            [active]="currentPage == '/problems'"> Problems </a>
+        <a mat-tab-link 
+            routerLink="/profile"
+            [active]="currentPage == '/profile'"> Profile </a>
+    </nav>
+</header>
 <router-outlet></router-outlet>

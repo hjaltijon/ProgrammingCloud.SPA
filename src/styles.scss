@@ -9,6 +9,19 @@ body {
 
 
 .container {
-    max-width: 960px;
+    max-width: 1280px;
     margin: 0 auto;
+}
+
+.inner-container{
+    max-width: 1280px;
+    margin: 0 auto;
+
+    padding: 16px;
+    box-sizing: border-box;
+    border-left: solid;
+    border-right: solid;
+    border-width: 1px;
+    border-color: gainsboro;
+    background-color: white;
 }

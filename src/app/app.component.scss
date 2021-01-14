@@ -1,4 +1,19 @@
 .main-title{
     display: table;
     margin: 0 auto;
+    text-decoration:none;
+    color: black;
+}
+header{
+    padding-top: 10px;
+}
+
+.logout-button{
+    float: right;
+    position: relative;
+    top: -32px;
+}
+
+.mat-tab-nav-bar{
+    width: 100%;
 }

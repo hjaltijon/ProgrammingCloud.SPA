@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './login.component';
 import { RouterModule } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -26,9 +27,10 @@ import { RouterModule } from '@angular/router';
     ]),
     MatInputModule,
     MatFormFieldModule,
-    MatButtonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatProgressSpinnerModule
   ]
 })
 export class LoginModule { }
