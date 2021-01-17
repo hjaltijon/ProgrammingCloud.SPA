@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SessionService } from './services/session.service';
 import { UserApiService } from './services-api/user-api.service';
 import { SharedDataService } from './services/shared-data.service';
+import { ProblemApiService } from './services-api/problem-api.service';
 
 
 
@@ -16,7 +17,8 @@ import { SharedDataService } from './services/shared-data.service';
   providers: [
     SessionService,
     UserApiService,
-    SharedDataService
+    SharedDataService,
+    ProblemApiService
   ]
 })
 export class CoreModule { }
