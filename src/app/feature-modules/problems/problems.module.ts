@@ -5,11 +5,17 @@ import { RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { ProblemComponent } from './problem/problem.component';
+import { CodeEditorModule } from 'src/app/shared/code-editor/code-editor.module';
 
 
 
 @NgModule({
-  declarations: [ProblemsComponent],
+  declarations: [ProblemsComponent, ProblemComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -17,10 +23,18 @@ import { MatTableModule } from '@angular/material/table';
         path: 'problems', 
         component: ProblemsComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'problems/:problemId',
+        component: ProblemComponent,
+        canActivate: [AuthGuard]
       }
     ]),
     MatProgressBarModule,
-    MatTableModule
+    MatTableModule,
+    MatButtonModule,
+    MatInputModule,
+    CodeEditorModule
   ]
 })
 export class ProblemsModule { }

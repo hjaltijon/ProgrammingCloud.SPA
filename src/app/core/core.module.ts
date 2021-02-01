@@ -15,10 +15,10 @@ import { ProblemApiService } from './services-api/problem-api.service';
     HttpClientModule
   ],
   providers: [
-    SessionService,
-    UserApiService,
-    SharedDataService,
-    ProblemApiService
+    // SessionService,
+    // UserApiService,
+    // SharedDataService,
+    // ProblemApiService
   ]
 })
 export class CoreModule { }

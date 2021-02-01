@@ -1,0 +1,49 @@
+<section class="container" *ngIf="loadingData">
+    <mat-progress-bar  mode="indeterminate"></mat-progress-bar>
+</section>
+
+<section class="inner-container" *ngIf="!loadingData">
+    
+    <div class="header">
+        <h2>Create new problem</h2>
+        <!-- <button type="button" class="save-button" mat-raised-button color="primary">Save</button> -->
+    </div>
+
+    <div class="inputs">
+        <mat-form-field>
+            <mat-label>Problem title</mat-label>
+            <input matInput placeholder="example title" value="">
+        </mat-form-field>
+        
+        <mat-form-field>
+            <mat-label>Problem description</mat-label>
+            <textarea matInput placeholder="Describe the problem here.."></textarea>
+        </mat-form-field>
+    </div>
+
+    <div class="border-divider"></div>
+
+    <div class="student-code-editor">
+        <app-code-editor (codeChangedEvent)="updateStudentCode($event)"></app-code-editor>
+        <div>
+            <h3>Code for the student</h3>
+            <p>This is the code the student will see. It's meant to be skeleton code to help the student figure out what he/she is supposed to do. Can be left empty.</p>
+        </div>
+    </div>
+
+    <div class="border-divider"></div>
+
+    <div class="test-code-editor">
+        <app-code-editor (codeChangedEvent)="updateTestCode($event)"></app-code-editor>
+        <div>
+            <h3>Test code</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex doloribus fuga consequatur cupiditate itaque rerum quidem neque sit fugiat quisquam molestiae obcaecati aut expedita, odit explicabo esse minus velit voluptatibus?</p>
+        </div>
+    </div>
+    <div class="footer">
+        <button type="button" class="save-button" mat-raised-button color="primary">Save</button>
+        <br clear="both" />
+    </div>
+    
+    
+</section>

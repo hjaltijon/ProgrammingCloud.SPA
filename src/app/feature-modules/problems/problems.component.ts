@@ -28,4 +28,10 @@ export class ProblemsComponent implements OnInit {
     this.loadingData = false;
   }
 
+
+  showCreateNewProblemModal: boolean = false;
+  createNewProblem(){
+    this.showCreateNewProblemModal = true;
+  }
+
 }

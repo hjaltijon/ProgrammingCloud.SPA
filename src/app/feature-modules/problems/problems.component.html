@@ -1,5 +1,6 @@
-<section class="container topsection">
-    <!-- <h2>Classrooms</h2> -->
+<section class="inner-container">
+    <h2>My problems</h2>
+    <button routerLink="/problems/new" type="button" class="add-problem-button" mat-stroked-button color="primary">Create new problem</button>
     <mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
     <table *ngIf="!loadingData" mat-table [dataSource]="problems" class="mat-elevation-z8">
 
@@ -30,3 +31,4 @@
         <tr class="table-row" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 </section>
+

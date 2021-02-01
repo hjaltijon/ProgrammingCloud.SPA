@@ -1,0 +1,68 @@
+.save-button{
+    float: right;
+}
+
+
+
+h2{
+    display: inline-block;
+}
+
+
+
+.inputs {
+    width: 60%;
+    mat-form-field{
+        width: 100%;
+    }
+    grid-area: inputs;
+}
+.student-code-editor{
+    display: grid;
+    grid-gap: 16px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+    "student-editor student-editor student-editor student-div";
+
+    app-code-editor{
+        grid-area: student-editor;
+    }
+    div{
+        grid-area: student-div;
+    }
+}
+
+.test-code-editor{
+    display: grid;
+    grid-gap: 16px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+    "test-editor test-editor test-editor test-div";
+
+    app-code-editor{
+        grid-area: test-editor;
+    }
+    div{
+        grid-area: test-div;
+    }
+}
+
+.border-divider{
+    margin-top: 48px;
+    margin-bottom: 48px;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: gainsboro;
+}
+
+.header{
+    background-color: gainsboro;
+    margin: -16px -16px 16px -16px;
+    padding: 16px 16px 0px 16px;
+}
+
+.footer{
+    background-color: gainsboro;
+    margin: 48px -16px -16px -16px;
+    padding: 16px 16px 16px 16px;
+}
