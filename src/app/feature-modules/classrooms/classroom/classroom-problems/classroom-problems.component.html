@@ -1,0 +1,8 @@
+<section class="container" *ngIf="loadingData">
+    <mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
+</section>
+<section class="inner-container" *ngIf="!loadingData">
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let problem of problems, index as i" cdkDrag>{{i + 1}}. {{problem.title}}</div>
+    </div>
+</section>

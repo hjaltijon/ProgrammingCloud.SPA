@@ -5,26 +5,36 @@
 <section class="inner-container" *ngIf="!loadingData">
     
     <div class="header">
-        <h2>Create new problem</h2>
+        <h2 *ngIf="componentMode == 'create'">Create new problem</h2>
+        <h2 *ngIf="componentMode == 'update'">Edit problem</h2>
         <!-- <button type="button" class="save-button" mat-raised-button color="primary">Save</button> -->
     </div>
 
     <div class="inputs">
         <mat-form-field>
             <mat-label>Problem title</mat-label>
-            <input matInput placeholder="example title" value="">
+            <input matInput placeholder="example title" value="" [formControl]="title">
+            <mat-error *ngIf="title.hasError('required')">
+                Title is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="title.hasError('maxlength')">
+                Title has max length of 200 characters
+            </mat-error>
         </mat-form-field>
         
         <mat-form-field>
             <mat-label>Problem description</mat-label>
-            <textarea matInput placeholder="Describe the problem here.."></textarea>
+            <textarea matInput placeholder="Describe the problem here.." [formControl]="description"></textarea>
+            <mat-error *ngIf="description.hasError('maxlength')">
+                Description has max length of 4000 characters
+            </mat-error>
         </mat-form-field>
     </div>
 
     <div class="border-divider"></div>
 
     <div class="student-code-editor">
-        <app-code-editor (codeChangedEvent)="updateStudentCode($event)"></app-code-editor>
+        <app-code-editor [initialCode]="initialStudentStartingCode" (codeChangedEvent)="updateStudentCode($event)"></app-code-editor>
         <div>
             <h3>Code for the student</h3>
             <p>This is the code the student will see. It's meant to be skeleton code to help the student figure out what he/she is supposed to do. Can be left empty.</p>
@@ -34,14 +44,15 @@
     <div class="border-divider"></div>
 
     <div class="test-code-editor">
-        <app-code-editor (codeChangedEvent)="updateTestCode($event)"></app-code-editor>
+        <app-code-editor [initialCode]="initialTestingCode" (codeChangedEvent)="updateTestCode($event)"></app-code-editor>
         <div>
             <h3>Test code</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex doloribus fuga consequatur cupiditate itaque rerum quidem neque sit fugiat quisquam molestiae obcaecati aut expedita, odit explicabo esse minus velit voluptatibus?</p>
         </div>
     </div>
     <div class="footer">
-        <button type="button" class="save-button" mat-raised-button color="primary">Save</button>
+        <button [disabled]="!title.valid || !description.valid || showSpinner" (click)="save()" type="button" class="save-button" mat-raised-button color="primary">Save</button>
+        <mat-spinner *ngIf="showSpinner" [diameter]="36"></mat-spinner>
         <br clear="both" />
     </div>
     

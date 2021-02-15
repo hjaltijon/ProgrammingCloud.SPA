@@ -1,5 +1,5 @@
 <section class="inner-container">
-    <h2>My problems</h2>
+    <h2>My Problems</h2>
     <button routerLink="/problems/new" type="button" class="add-problem-button" mat-stroked-button color="primary">Create new problem</button>
     <mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
     <table *ngIf="!loadingData" mat-table [dataSource]="problems" class="mat-elevation-z8">
@@ -11,7 +11,7 @@
         <ng-container matColumnDef="title">
             <th mat-header-cell *matHeaderCellDef> Problem title </th>
             <td mat-cell *matCellDef="let element"> {{element.title}} 
-                <a [routerLink]="'/classrooms/'+element.classroomId" class="table-row-link"></a>
+                <a [routerLink]="'/problems/'+element.problemId" class="table-row-link"></a>
             </td>            
         </ng-container>
         

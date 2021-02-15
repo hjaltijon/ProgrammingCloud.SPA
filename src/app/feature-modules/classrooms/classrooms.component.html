@@ -1,5 +1,5 @@
-<section class="container topsection">
-    <!-- <h2>Classrooms</h2> -->
+<section class="inner-container">
+    <h2>My Classrooms</h2>
     <mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
     <table *ngIf="!loadingData" mat-table [dataSource]="classrooms" class="mat-elevation-z8">
 

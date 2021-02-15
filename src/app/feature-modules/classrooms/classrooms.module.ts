@@ -8,11 +8,12 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ClassroomComponent } from './classroom/classroom.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
-
+import { ClassroomProblemsComponent } from './classroom/classroom-problems/classroom-problems.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
-  declarations: [ClassroomsComponent, ClassroomComponent],
+  declarations: [ClassroomsComponent, ClassroomComponent, ClassroomProblemsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -34,7 +35,8 @@ import { AuthGuard } from 'src/app/core/guards/auth.guard';
     MatTableModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
-    MatTabsModule
+    MatTabsModule,
+    DragDropModule
   ]
 })
 export class ClassroomsModule { }

@@ -5,4 +5,5 @@ export class Problem {
     createdDate: Date;
     studentStartingCode: string;
     testingCode: string;
+    description: string;
 }

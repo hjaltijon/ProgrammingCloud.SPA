@@ -1,4 +1,4 @@
-<section class="container topsection" *ngIf="loadingData">
+<section class="container" *ngIf="loadingData">
     <mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
 </section>
 <section class="inner-container" *ngIf="!loadingData">
@@ -7,18 +7,13 @@
     <span style="float:right">Teacher name: <strong>{{classroom.teacherFullName}}</strong> </span>
     <br>
     <span>Created date: <strong>{{classroom.createdDate | date:'short'}}</strong></span>
-</section>
 
-<!-- tabs container -->
-<section class="inner-container" *ngIf="!loadingData">
+    <!-- tabs -->
     <mat-tab-group>
-        <mat-tab label="Assigned problems"> Content 1 </mat-tab>
+        <mat-tab label="Assigned problems"> <app-classroom-problems></app-classroom-problems> </mat-tab>
         <mat-tab label="Students"> Content 2 </mat-tab>
         <mat-tab label="Invites"> Content 3 </mat-tab>
-      </mat-tab-group>
-</section>
+    </mat-tab-group>
 
-<!-- table container -->
-<section class="inner-container" *ngIf="!loadingData">
-
+    <!-- table -->
 </section>

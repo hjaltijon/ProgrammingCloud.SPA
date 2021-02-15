@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { CodeEditorService } from 'src/app/core/services/code-editor.service';
 
 declare const monaco: any;
@@ -12,6 +11,7 @@ declare const monaco: any;
 export class CodeEditorComponent implements AfterViewInit {
 
   @ViewChild("editor") editorContent: ElementRef;
+  @Input() initialCode: string;
   @Output() codeChangedEvent = new EventEmitter<string>();
 
   editor: any;
@@ -19,25 +19,30 @@ export class CodeEditorComponent implements AfterViewInit {
     private _editorService: CodeEditorService
   ) { }
 
-  editorLoadedSubscription: Subscription;
-  ngAfterViewInit(): void {
-    this.editorLoadedSubscription = this._editorService.monacoEditorLoaded.subscribe(loaded => {
-      if(loaded == true){
-        this.initMonaco();
-      }
-    })
+  async ngAfterViewInit(): Promise<void> {
+    this._editorService.loadEditor();
+    this.initMonaco();
   }
 
 
   // Will be called once monaco library is available
   initMonaco() {
+    let code = this.initialCode;
+    if(code == null){
+      code = [
+          "function x() {",
+          "\tconsole.log('Hello world!');",
+          "}"
+        ].join("\n");
+    }
     const myDiv: HTMLDivElement = this.editorContent.nativeElement;
     this.editor = monaco.editor.create(myDiv, {
-      value: [
-        "function x() {",
-        "\tconsole.log('Hello world!');",
-        "}"
-      ].join("\n"),
+      // value: [
+      //   "function x() {",
+      //   "\tconsole.log('Hello world!');",
+      //   "}"
+      // ].join("\n"),
+      value: code,
       language: "javascript",
       theme: "vs-dark"
     });
@@ -46,11 +51,6 @@ export class CodeEditorComponent implements AfterViewInit {
     this.editor.onDidChangeModelContent((e: any)  => {
       this.codeChangedEvent.emit(this.editor.getValue());
     });
-  }
-
-
-  ngOnDestroy() {
-    this.editorLoadedSubscription.unsubscribe();
   }
 
 

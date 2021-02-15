@@ -8,9 +8,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProblemComponent } from './problem/problem.component';
 import { CodeEditorModule } from 'src/app/shared/code-editor/code-editor.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -34,7 +36,12 @@ import { CodeEditorModule } from 'src/app/shared/code-editor/code-editor.module'
     MatTableModule,
     MatButtonModule,
     MatInputModule,
-    CodeEditorModule
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CodeEditorModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ]
 })
 export class ProblemsModule { }
