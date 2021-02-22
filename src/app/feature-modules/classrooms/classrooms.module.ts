@@ -10,10 +10,13 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { ClassroomProblemsComponent } from './classroom/classroom-problems/classroom-problems.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ProblemSolvingComponent } from './classroom/classroom-problems/problem-solving/problem-solving.component';
+import { CodeEditorModule } from 'src/app/shared/code-editor/code-editor.module';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
-  declarations: [ClassroomsComponent, ClassroomComponent, ClassroomProblemsComponent],
+  declarations: [ClassroomsComponent, ClassroomComponent, ClassroomProblemsComponent, ProblemSolvingComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -30,13 +33,20 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         path: 'classrooms/:classroomId',
         component: ClassroomComponent, 
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'classrooms/:classroomId/problems/:problemId',
+        component: ProblemSolvingComponent, 
+        canActivate: [AuthGuard]
       }
     ]),
     MatTableModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatTabsModule,
-    DragDropModule
+    DragDropModule,
+    CodeEditorModule,
+    MatButtonModule
   ]
 })
 export class ClassroomsModule { }

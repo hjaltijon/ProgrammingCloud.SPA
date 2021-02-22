@@ -42,7 +42,7 @@ export class ProblemComponent implements OnInit {
       this.initialStudentStartingCode = problem.studentStartingCode;
       this.initialTestingCode = problem.testingCode;
     }
-    else{ //FLAWED URI
+    else{ //FLAWED ROUTE
       this._router.navigate(['/problems']);
     }
 

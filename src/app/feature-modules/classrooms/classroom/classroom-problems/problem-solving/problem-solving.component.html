@@ -1,0 +1,94 @@
+<section class="container" *ngIf="loadingData">
+    <mat-progress-bar  mode="indeterminate"></mat-progress-bar>
+</section>
+
+<section class="inner-container" *ngIf="!loadingData">
+    
+    <div class="header">
+        <h2>Solve Problem:</h2> <h2 class="colored-title">{{problem.title}}</h2>
+    </div>
+
+    <span>Problem title: <strong>{{problem.title}}</strong> </span>
+    <span style="float:right">Classroom name: <strong>{{classroom.title}}</strong> </span>
+    <!-- <br>
+    <span>Created date: <strong>{{classroom.createdDate | date:'short'}}</strong></span> -->
+   
+    
+    <!-- <div class="border-divider"></div> -->
+
+    <div class="description">
+        <span>Problem description:</span>
+        <p>
+            {{problem.description}}
+        </p>
+    </div>
+
+    <div class="student-code-editor">
+        <app-code-editor [initialCode]="problem.studentStartingCode" (codeChangedEvent)="updateStudentCode($event)"></app-code-editor>
+    </div>
+    
+    <ng-container *ngIf="codeExecutionResult != null">
+        <div class="border-divider"></div>
+        <div class="execution-result-container" [class.red]="codeExecutionResult.ecounteredCompilerErrors == true">
+            <h3 *ngIf="codeExecutionResult.ecounteredCompilerErrors == true">Compiler error(s) encountered:</h3>
+            <h3 *ngIf="codeExecutionResult.ecounteredCompilerErrors != true">Execution results:</h3>
+            <svg (click)="closeExecutionResult()" width="28px" height="28px" viewBox='0 0 512 512'>
+                <path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32' d='M368 368L144 144M368 144L144 368'/>
+            </svg>
+            <div *ngIf="codeExecutionResult.ecounteredCompilerErrors == true">
+                <div *ngFor="let error of codeExecutionResult.compilerErrors; let index = index">
+                    <p><strong>Location: </strong>"{{error.location}}"<br><strong>Message: </strong>"{{error.message}}"</p>
+                </div>
+            </div>
+            <div *ngIf="codeExecutionResult.ecounteredCompilerErrors != true">
+                <table mat-table [dataSource]="codeExecutionResult.tests" class="mat-elevation-z8">
+
+                    <!--- Note that these columns can be defined in any order.
+                        The actual rendered columns are set as a property on the row definition" -->
+                
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="outcome">
+                    <th mat-header-cell *matHeaderCellDef> Success </th>
+                    <td mat-cell *matCellDef="let element"> {{element.success}} </td>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="input">
+                    <th mat-header-cell *matHeaderCellDef> Input </th>
+                    <td mat-cell *matCellDef="let element"> {{element.input}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="expected">
+                        <th mat-header-cell *matHeaderCellDef> Expected </th>
+                        <td mat-cell *matCellDef="let element"> {{element.expected}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actual">
+                        <th mat-header-cell *matHeaderCellDef> Actual </th>
+                        <td mat-cell *matCellDef="let element"> {{element.actual}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="message">
+                        <th mat-header-cell *matHeaderCellDef> Message </th>
+                        <td mat-cell *matCellDef="let element"> {{element.message}} </td>
+                    </ng-container>
+                
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row [class.green]="row.success == true" [class.red]="row.success == false" *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+        </div>
+    </ng-container>
+    
+
+    <div class="footer">
+        <button [disabled]="showSpinner" (click)="execute()" type="button" class="save-button" mat-raised-button color="primary">Execute!</button>
+        <mat-spinner *ngIf="showSpinner" [diameter]="36"></mat-spinner>
+        <br clear="both" />
+    </div>
+    
+</section>

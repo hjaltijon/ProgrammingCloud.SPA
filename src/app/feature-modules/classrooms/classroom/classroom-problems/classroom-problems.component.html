@@ -2,7 +2,17 @@
     <mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
 </section>
 <section class="inner-container" *ngIf="!loadingData">
-    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let problem of problems, index as i" cdkDrag>{{i + 1}}. {{problem.title}}</div>
+    <div cdkDropList class="list" (cdkDropListDropped)="drop($event)">
+        <div class="list-item" *ngFor="let problem of problems, index as i" cdkDrag>
+            <a [routerLink]="'/classrooms/' + classroomId + '/problems/' +problem.problemId" class="table-row-link"></a>
+            <div>
+                {{i + 1}}. {{problem.title}}
+            </div>
+            <div class="drag" cdkDragHandle>
+                <svg width="20px" height="20px" viewBox="0 0 512 512">
+                    <path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32' d="M176 112l80-80 80 80M255.98 32l.02 448M176 400l80 80 80-80M400 176l80 80-80 80M112 176l-80 80 80 80M32 256h448"></path>
+                </svg>
+            </div>
+        </div>
     </div>
 </section>

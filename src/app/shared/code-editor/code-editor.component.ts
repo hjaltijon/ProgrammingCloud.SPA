@@ -43,8 +43,9 @@ export class CodeEditorComponent implements AfterViewInit {
       //   "}"
       // ].join("\n"),
       value: code,
-      language: "javascript",
-      theme: "vs-dark"
+      language: "csharp",
+      theme: "vs-dark",
+      automaticLayout: true
     });
 
     this.codeChangedEvent.emit(this.editor.getValue());

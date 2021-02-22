@@ -2,7 +2,9 @@
     <mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
 </section>
 <section class="inner-container" *ngIf="!loadingData">
-    <h2>Classroom</h2>
+    <div>
+        <h2>Classroom:</h2> <h2 class="colored-title">{{classroom.title}}</h2>
+    </div>
     <span>Classroom name: <strong>{{classroom.title}}</strong> </span>
     <span style="float:right">Teacher name: <strong>{{classroom.teacherFullName}}</strong> </span>
     <br>

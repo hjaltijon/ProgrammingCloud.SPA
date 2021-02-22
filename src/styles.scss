@@ -18,7 +18,7 @@ body {
     margin: 0 auto;
 
     padding: 16px;
-    margin-bottom: 64px;
+    //margin-bottom: 64px;
     box-sizing: border-box;
     border-left: solid;
     border-right: solid;
@@ -26,4 +26,10 @@ body {
     border-width: 1px;
     border-color: gainsboro;
     background-color: white;
+    margin-bottom: 32px;
+}
+
+.colored-title{
+    padding-left: 8px;
+    color: #3f51b5;
 }

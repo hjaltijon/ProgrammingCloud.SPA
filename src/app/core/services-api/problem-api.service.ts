@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CodeExecutionResult } from 'src/app/models/api/code-execution/code-execution-result';
 import { Problem } from 'src/app/models/api/problem/problem';
 import { createPatchUpdateBody } from 'src/app/shared/helpers';
 import { environment as ENV } from '../../../environments/environment';
@@ -15,6 +16,26 @@ export class ProblemApiService {
     private _sessionService: SessionService
   ) { }
 
+  
+  async executeCode(code: string, problemId: number): Promise<CodeExecutionResult>{
+    const body =
+    {
+      studentCode: code,
+      problemId: problemId
+    };
+    try {
+      return await this._http.post<CodeExecutionResult>(
+        ENV.baseApiUrl + 'compile-run',
+        body,
+        {
+          headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
+        }
+      ).toPromise();
+    } catch (error) {
+      this.handleError(error);
+    }
+    return null;//never happens
+  }
 
   async getProblems(userId: number): Promise<Problem[]>{
     try {

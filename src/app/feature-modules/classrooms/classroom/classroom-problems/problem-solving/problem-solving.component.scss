@@ -1,0 +1,82 @@
+h2{
+    display: inline-block;
+}
+
+.header{
+    background-color: gainsboro;
+    margin: -16px -16px 16px -16px;
+    padding: 16px 16px 0px 16px;
+}
+
+.footer{
+    background-color: gainsboro;
+    margin: 48px -16px -16px -16px;
+    padding: 16px 16px 16px 16px;
+}
+
+mat-spinner{
+    float: right;
+    margin-right: 8px;
+  }
+
+  .save-button{
+    float: right;
+}
+
+.border-divider{
+    margin-top: 48px;
+    margin-bottom: 48px;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: gainsboro;
+}
+
+.description{
+    margin-top: 32px;
+
+    p{
+        background-color: #fafafa;
+        border: solid;
+        border-width: 1px;
+        border-color: gainsboro;
+        padding: 8px;
+        white-space: pre-line;
+    }
+}
+
+table{
+    width: 100%;
+}
+
+.green{
+    background-color: #cbffcb;
+}
+
+
+.execution-result-container{
+    padding: 8px;
+    border: solid;
+    border-width: 1px;
+    border-color: gainsboro;
+    background-color: #fafafa;
+}
+
+.red{
+    background-color: #ffd1d1;
+}
+
+.green{
+    background-color: #cbffcb;
+}
+
+h3{
+    display: inline-block;
+}
+
+svg{
+    float: right;
+}
+svg:hover{
+    float: right;
+    cursor: pointer;
+}

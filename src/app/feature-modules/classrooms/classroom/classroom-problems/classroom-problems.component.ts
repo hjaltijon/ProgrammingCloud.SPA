@@ -18,9 +18,11 @@ export class ClassroomProblemsComponent implements OnInit {
 
   problems: Problem[];
   loadingData: boolean = true;
+  classroomId: number = null;
   async ngOnInit(): Promise<void> {
     this.loadingData = true;
     let classroomId: number = parseInt(this._route.snapshot.paramMap.get('classroomId'));
+    this.classroomId = classroomId;
     this.problems = await this._problemApiService.getClassroomProblems(classroomId)
     this.loadingData = false;
   }
