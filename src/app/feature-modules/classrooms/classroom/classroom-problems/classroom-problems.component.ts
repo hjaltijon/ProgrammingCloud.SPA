@@ -23,7 +23,7 @@ export class ClassroomProblemsComponent implements OnInit {
     this.loadingData = true;
     let classroomId: number = parseInt(this._route.snapshot.paramMap.get('classroomId'));
     this.classroomId = classroomId;
-    this.problems = await this._problemApiService.getClassroomProblems(classroomId)
+    this.problems = await this._problemApiService.getClassroomProblems(classroomId);
     this.loadingData = false;
   }
 

@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { CodeEditorService } from 'src/app/core/services/code-editor.service';
+import { CompilerError } from 'src/app/models/api/compiler-error';
 
 declare const monaco: any;
 
@@ -8,10 +9,11 @@ declare const monaco: any;
   templateUrl: './code-editor.component.html',
   styleUrls: ['./code-editor.component.scss']
 })
-export class CodeEditorComponent implements AfterViewInit {
+export class CodeEditorComponent implements AfterViewInit, OnChanges  {
 
   @ViewChild("editor") editorContent: ElementRef;
   @Input() initialCode: string;
+  @Input() compilerErrors: CompilerError[];
   @Output() codeChangedEvent = new EventEmitter<string>();
 
   editor: any;
@@ -19,11 +21,18 @@ export class CodeEditorComponent implements AfterViewInit {
     private _editorService: CodeEditorService
   ) { }
 
+  monacoInitialized: boolean = false;
   async ngAfterViewInit(): Promise<void> {
-    this._editorService.loadEditor();
+    await this._editorService.loadEditor();
     this.initMonaco();
+    this.monacoInitialized = true;
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['compilerErrors'] && this.monacoInitialized) {
+      this.updateModelMarkers();
+    }
+  }
 
   // Will be called once monaco library is available
   initMonaco() {
@@ -54,5 +63,19 @@ export class CodeEditorComponent implements AfterViewInit {
     });
   }
 
+  updateModelMarkers(){
+    let modelMarkers: any[] = [];
+    this.compilerErrors.forEach(error => {
+      modelMarkers.push({
+        startLineNumber: error.line,
+        startColumn: error.column,
+        endLineNumber: error.line,
+        endColumn: error.column,
+        message: error.message,
+        severity: monaco.MarkerSeverity.Error
+      });
+    });
+    monaco.editor.setModelMarkers(this.editor.getModel(), 'error', modelMarkers);
+  }
 
 }

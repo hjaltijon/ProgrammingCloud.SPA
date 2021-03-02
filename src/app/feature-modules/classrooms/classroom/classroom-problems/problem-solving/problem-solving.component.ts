@@ -3,8 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClassroomApiService } from 'src/app/core/services-api/classroom-api.service';
 import { ProblemApiService } from 'src/app/core/services-api/problem-api.service';
 import { CodeEditorService } from 'src/app/core/services/code-editor.service';
+import { SharedDataService } from 'src/app/core/services/shared-data.service';
 import { Classroom } from 'src/app/models/api/classroom/classroom';
 import { CodeExecutionResult } from 'src/app/models/api/code-execution/code-execution-result';
+import { CompilerError } from 'src/app/models/api/compiler-error';
 import { Problem } from 'src/app/models/api/problem/problem';
 
 @Component({
@@ -19,7 +21,8 @@ export class ProblemSolvingComponent implements OnInit {
     private _problemApiService: ProblemApiService,
     private _classroomApiService: ClassroomApiService,
     private _router: Router,
-    private _editorService: CodeEditorService
+    private _editorService: CodeEditorService,
+    private _sharedDataService: SharedDataService
     ) { }
 
 
@@ -53,6 +56,14 @@ export class ProblemSolvingComponent implements OnInit {
   studentCode: string = "";
   updateStudentCode(code: string){
     this.studentCode = code;
+    this.compile();
+  }
+
+  studentEditorCompilerErrors: CompilerError[] = null;
+  async compile(){
+    if(await this._sharedDataService.debounce(500, "problem-solving-editor")) return;
+    let errors = await this._problemApiService.compile(this.studentCode, this.problem.problemId);
+    this.studentEditorCompilerErrors = errors.filter(error => error.type === "StudentEditorError");
   }
 
   showSpinner: boolean = false;

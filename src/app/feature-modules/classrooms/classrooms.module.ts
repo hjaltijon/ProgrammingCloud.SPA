@@ -13,10 +13,12 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ProblemSolvingComponent } from './classroom/classroom-problems/problem-solving/problem-solving.component';
 import { CodeEditorModule } from 'src/app/shared/code-editor/code-editor.module';
 import { MatButtonModule } from '@angular/material/button';
+import { ClassroomStudentsComponent } from './classroom/classroom-students/classroom-students.component';
+import { ClassroomInvitesComponent } from './classroom/classroom-invites/classroom-invites.component';
 
 
 @NgModule({
-  declarations: [ClassroomsComponent, ClassroomComponent, ClassroomProblemsComponent, ProblemSolvingComponent],
+  declarations: [ClassroomsComponent, ClassroomComponent, ClassroomProblemsComponent, ProblemSolvingComponent, ClassroomStudentsComponent, ClassroomInvitesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([

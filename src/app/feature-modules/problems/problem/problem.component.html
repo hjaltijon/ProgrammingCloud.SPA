@@ -37,7 +37,7 @@
     <div class="border-divider"></div>
 
     <div class="student-code-editor">
-        <app-code-editor [initialCode]="initialStudentStartingCode" (codeChangedEvent)="updateStudentCode($event)"></app-code-editor>
+        <app-code-editor [compilerErrors]="studentEditorCompilerErrors" [initialCode]="initialStudentStartingCode" (codeChangedEvent)="updateStudentCode($event)"></app-code-editor>
         <div>
             <h3>Code for the student</h3>
             <p>This is the code the student will see. It's meant to be skeleton code to help the student figure out what he/she is supposed to do. Can be left empty.</p>
@@ -47,7 +47,7 @@
     <div class="border-divider"></div>
 
     <div class="test-code-editor">
-        <app-code-editor [initialCode]="initialTestingCode" (codeChangedEvent)="updateTestCode($event)"></app-code-editor>
+        <app-code-editor [compilerErrors]="teacherEditorCompilerErrors" [initialCode]="initialTestingCode" (codeChangedEvent)="updateTestCode($event)"></app-code-editor>
         <div>
             <h3>Test code</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex doloribus fuga consequatur cupiditate itaque rerum quidem neque sit fugiat quisquam molestiae obcaecati aut expedita, odit explicabo esse minus velit voluptatibus?</p>

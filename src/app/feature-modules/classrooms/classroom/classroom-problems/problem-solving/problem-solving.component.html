@@ -24,7 +24,7 @@
     </div>
 
     <div class="student-code-editor">
-        <app-code-editor [initialCode]="problem.studentStartingCode" (codeChangedEvent)="updateStudentCode($event)"></app-code-editor>
+        <app-code-editor [compilerErrors]="studentEditorCompilerErrors" [initialCode]="problem.studentStartingCode" (codeChangedEvent)="updateStudentCode($event)"></app-code-editor>
     </div>
     
     <ng-container *ngIf="codeExecutionResult != null">

@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ClassroomInvite } from 'src/app/models/api/classroom-invite';
 import { Classroom } from 'src/app/models/api/classroom/classroom';
 import { environment as ENV } from '../../../environments/environment';
 import { SessionService } from '../services/session.service';
@@ -31,6 +32,20 @@ export class ClassroomApiService {
       try {
         return await this._http.get<Classroom>(
           ENV.baseApiUrl + 'classrooms/' + classroomId,
+          {
+            headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
+          }
+        ).toPromise();
+      } catch (error) {
+        this.handleError(error);
+      }
+      return null;//never happens
+    }
+
+    async getClassroomInvites(classroomId: number): Promise<ClassroomInvite[]>{
+      try {
+        return await this._http.get<ClassroomInvite[]>(
+          ENV.baseApiUrl + 'classroom/' + classroomId + '/invites',
           {
             headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
           }

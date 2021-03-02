@@ -19,4 +19,21 @@ export class SharedDataService {
   
 
 
+
+
+  debounceDictionary: { [key: string] : Date; } = {}
+  async debounce(ms: number, key: string): Promise<boolean>{
+    let timeAtLastTypedLetter = new Date();
+    this.debounceDictionary[key] = timeAtLastTypedLetter;
+    await this.timeout(ms);
+    if(timeAtLastTypedLetter != this.debounceDictionary[key]){
+      return true;
+    }
+    return false;
+  }
+
+  async timeout(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
 }

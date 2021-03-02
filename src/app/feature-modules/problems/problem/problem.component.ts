@@ -4,6 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProblemApiService } from 'src/app/core/services-api/problem-api.service';
 import { CodeEditorService } from 'src/app/core/services/code-editor.service';
+import { SharedDataService } from 'src/app/core/services/shared-data.service';
+import { CompilerError } from 'src/app/models/api/compiler-error';
 import { Problem } from 'src/app/models/api/problem/problem';
 
 @Component({
@@ -18,7 +20,8 @@ export class ProblemComponent implements OnInit {
     private _route: ActivatedRoute,
     private _problemApiService: ProblemApiService,
     private _router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _sharedDataService: SharedDataService
   ) { 
   }
 
@@ -101,10 +104,22 @@ export class ProblemComponent implements OnInit {
   testingCode: string = "";
   updateStudentCode(code: string){
     this.studentStartingCode = code;
+    this.compile()
   }
 
   updateTestCode(code: string){
     this.testingCode = code;
+    this.compile()
+  }
+
+
+  studentEditorCompilerErrors: CompilerError[] = null;
+  teacherEditorCompilerErrors: CompilerError[] = null;
+  async compile(){
+    if(await this._sharedDataService.debounce(500, "problem-creation-editor")) return;
+    let errors = await this._problemApiService.compile(this.studentStartingCode, this.problemId, this.testingCode);
+    this.studentEditorCompilerErrors = errors.filter(error => error.type === "StudentEditorError");
+    this.teacherEditorCompilerErrors = errors.filter(error => error.type === "TeacherEditorError");
   }
 
 }

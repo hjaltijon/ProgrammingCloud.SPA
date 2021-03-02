@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CodeExecutionResult } from 'src/app/models/api/code-execution/code-execution-result';
+import { CompilerError } from 'src/app/models/api/compiler-error';
 import { Problem } from 'src/app/models/api/problem/problem';
 import { createPatchUpdateBody } from 'src/app/shared/helpers';
 import { environment as ENV } from '../../../environments/environment';
@@ -26,6 +27,33 @@ export class ProblemApiService {
     try {
       return await this._http.post<CodeExecutionResult>(
         ENV.baseApiUrl + 'compile-run',
+        body,
+        {
+          headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
+        }
+      ).toPromise();
+    } catch (error) {
+      this.handleError(error);
+    }
+    return null;//never happens
+  }
+
+  async compile(code: string, problemId: number, testingCode: string = null): Promise<CompilerError[]>{
+    let useDTOTestingCode = false;
+    if(testingCode !== null){
+      useDTOTestingCode = true;
+    }
+
+    const body =
+    {
+      studentCode: code,
+      problemId: problemId,
+      testingCode: testingCode,
+      useDTOTestingCode
+    };
+    try {
+      return await this._http.post<CompilerError[]>(
+        ENV.baseApiUrl + 'compile',
         body,
         {
           headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
