@@ -13,8 +13,7 @@
     <!-- tabs -->
     <mat-tab-group>
         <mat-tab label="Assigned problems"> <app-classroom-problems></app-classroom-problems> </mat-tab>
-        <mat-tab [disabled]="!enableStudentAndInviteTabs" label="Students"> <app-classroom-students *ngIf="enableStudentAndInviteTabs"></app-classroom-students> </mat-tab>
-        <mat-tab [disabled]="!enableStudentAndInviteTabs" label="Invites"> <app-classroom-invites *ngIf="enableStudentAndInviteTabs"></app-classroom-invites> </mat-tab>
+        <mat-tab [disabled]="!enableStudentTab" label="Students"> <app-classroom-students *ngIf="enableStudentTab"></app-classroom-students> </mat-tab>
     </mat-tab-group>
 
     <!-- table -->

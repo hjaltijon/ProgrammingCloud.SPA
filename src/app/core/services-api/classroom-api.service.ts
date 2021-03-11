@@ -14,56 +14,95 @@ export class ClassroomApiService {
     private _sessionService: SessionService) { }
 
 
-    async getClassrooms(userId: number): Promise<Classroom[]>{
-      try {
-        return await this._http.get<Classroom[]>(
-          ENV.baseApiUrl + 'user/' + userId + '/classrooms',
-          {
-            headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
-          }
-        ).toPromise();
-      } catch (error) {
-        this.handleError(error);
-      }
-      return null;//never happens
+  async getClassrooms(userId: number): Promise<Classroom[]>{
+    try {
+      return await this._http.get<Classroom[]>(
+        ENV.baseApiUrl + 'user/' + userId + '/classrooms',
+        {
+          headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
+        }
+      ).toPromise();
+    } catch (error) {
+      this.handleError(error);
     }
+    return null;//never happens
+  }
 
-    async getClassroom(classroomId: number): Promise<Classroom>{
-      try {
-        return await this._http.get<Classroom>(
-          ENV.baseApiUrl + 'classrooms/' + classroomId,
-          {
-            headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
-          }
-        ).toPromise();
-      } catch (error) {
-        this.handleError(error);
-      }
-      return null;//never happens
+  async getClassroom(classroomId: number): Promise<Classroom>{
+    try {
+      return await this._http.get<Classroom>(
+        ENV.baseApiUrl + 'classrooms/' + classroomId,
+        {
+          headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
+        }
+      ).toPromise();
+    } catch (error) {
+      this.handleError(error);
     }
+    return null;//never happens
+  }
 
-    async getClassroomInvites(classroomId: number): Promise<ClassroomInvite[]>{
-      try {
-        return await this._http.get<ClassroomInvite[]>(
-          ENV.baseApiUrl + 'classroom/' + classroomId + '/invites',
-          {
-            headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
-          }
-        ).toPromise();
-      } catch (error) {
-        this.handleError(error);
-      }
-      return null;//never happens
+  async getClassroomInvites(classroomId: number): Promise<ClassroomInvite[]>{
+    try {
+      return await this._http.get<ClassroomInvite[]>(
+        ENV.baseApiUrl + 'classroom/' + classroomId + '/invites',
+        {
+          headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
+        }
+      ).toPromise();
+    } catch (error) {
+      this.handleError(error);
     }
+    return null;//never happens
+  }
 
-    handleError(err: HttpErrorResponse){
-      if(err.status == 401){
-        this._sessionService.logout();
-        throw new Error(err.message);
-      }
-      else{
-        throw new Error(err.message);
-      }
+  handleError(err: HttpErrorResponse){
+    if(err.status == 401){
+      this._sessionService.logout();
+      throw new Error(err.message);
     }
+    else{
+      throw new Error(err.message);
+    }
+  }
+
+  async createUserClassroomRelation(email: string, classroomId: number): Promise<void>{
+    const body =
+    {
+      
+    };
+    try {
+      return await this._http.post<void>(
+        ENV.baseApiUrl + 'classrooms/' + classroomId + "/users/" + email,
+        body,
+        {
+          headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
+        }
+      ).toPromise();
+    } catch (error) {
+      this.handleError(error);
+    }
+    return null;//never happens
+  }
+
+
+  async createClassroom(title: string): Promise<Classroom>{
+    const body =
+    {
+      title: title
+    };
+    try {
+      return await this._http.post<Classroom>(
+        ENV.baseApiUrl + 'classrooms',
+        body,
+        {
+          headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
+        }
+      ).toPromise();
+    } catch (error) {
+      this.handleError(error);
+    }
+    return null;//never happens
+  }
 
 }

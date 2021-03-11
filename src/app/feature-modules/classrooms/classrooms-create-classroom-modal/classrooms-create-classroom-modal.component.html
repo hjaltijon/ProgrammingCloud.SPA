@@ -1,0 +1,13 @@
+<h3>Create classroom</h3>
+
+<mat-form-field>
+    <input type="text" matInput placeholder="Classroom title" value="" [formControl]="classroom">
+    <mat-error *ngIf="classroom.hasError('required')">
+        Please enter a classroom title
+    </mat-error>
+    <mat-error *ngIf="classroom.hasError('maxlength')">
+        Maximum number of characters exceeded.
+    </mat-error>
+</mat-form-field>
+
+<button (click)="createClassroom()" [disabled]="!classroom.valid" type="button" class="save-button" mat-raised-button color="primary">Create classroom!</button>

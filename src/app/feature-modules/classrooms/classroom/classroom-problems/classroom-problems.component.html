@@ -2,6 +2,8 @@
     <mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
 </section>
 <section class="inner-container" *ngIf="!loadingData">
+    <h3>Assigned problems</h3>
+    <button (click)="openDialog()" type="button" mat-stroked-button color="primary">Assign problems</button>
     <div cdkDropList class="list" (cdkDropListDropped)="drop($event)">
         <div class="list-item" *ngFor="let problem of problems, index as i" cdkDrag>
             <a [routerLink]="'/classrooms/' + classroomId + '/problems/' +problem.problemId" class="table-row-link"></a>

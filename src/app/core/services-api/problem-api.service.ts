@@ -144,6 +144,26 @@ export class ProblemApiService {
     }
     return null;//never happens
   }
+
+  async createProblemClassroomRelation(classroomId: number, problemId: number): Promise<void>{
+    const body =
+    {
+      classroomId: classroomId,
+      problemId: problemId
+    };
+    try {
+      return await this._http.post<void>(
+        ENV.baseApiUrl + 'problem-classroom-relations',
+        body,
+        {
+          headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
+        }
+      ).toPromise();
+    } catch (error) {
+      this.handleError(error);
+    }
+    return null;//never happens
+  }
   
 
 

@@ -8,11 +8,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
 import { RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ActivateAccountComponent } from './activate-account/activate-account.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, ActivateAccountComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -23,6 +25,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         // children: [
         //   {path: 'reset-password', component: LoginComponent},
         // ]
+      },
+      {
+        path: 'login/activate-account', 
+        component: ActivateAccountComponent
       }
     ]),
     MatInputModule,
@@ -30,7 +36,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ]
 })
 export class LoginModule { }

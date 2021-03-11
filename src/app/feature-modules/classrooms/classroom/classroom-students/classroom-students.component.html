@@ -1,7 +1,9 @@
-<section class="inner-container">
-    <!-- <h2>My Classrooms</h2> -->
-    <mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
-    <table *ngIf="!loadingData" mat-table [dataSource]="users" class="mat-elevation-z8">
+<mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
+<section class="inner-container" *ngIf="!loadingData">
+
+    <h3>Students</h3>
+    <button (click)="openDialog()" type="button" mat-stroked-button color="primary">Add student</button>
+    <table  mat-table [dataSource]="users" class="mat-elevation-z8">
 
         <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->

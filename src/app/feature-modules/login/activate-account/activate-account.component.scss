@@ -1,0 +1,53 @@
+// .login-form {
+//     min-width: 150px;
+//     max-width: 500px;
+//     width: 100%;
+//     margin: 0 auto;
+//   }
+
+.full-width {
+    width: 100%;
+}
+
+.activate-box{
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    margin: 28vh auto 0 auto;
+    padding: 16px;
+    border: solid;
+    border-width: 1px;
+    border-color: gainsboro;
+    background-color: white;
+}
+
+.activate-button{
+    float: right;
+}
+
+mat-spinner{
+  float: right;
+  margin-right: 8px;
+}
+
+h2{
+    display: inline-block;
+}
+
+// form{
+//     padding: 12px;
+//     border: solid;
+//     border-width: 1px;
+//     border-color: gainsboro;
+//     background-color: white;
+// }
+
+.header{
+    background-color: gainsboro;
+    margin: -16px -16px 16px -16px;
+    padding: 16px 16px 0px 16px;
+}
+
+.footer{
+    margin-top: 16px;
+}

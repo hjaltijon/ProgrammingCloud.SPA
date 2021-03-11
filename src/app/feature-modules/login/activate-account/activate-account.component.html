@@ -1,0 +1,58 @@
+<section class="container">
+    <div class="activate-box"> 
+        <div class="header">
+            <h2>Create student account</h2>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="activate()" class="login-form">
+            <mat-form-field class="full-width">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="example@example.com" value="example@example.com" formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput placeholder="" value="" formControlName="password">
+                <mat-error *ngIf="form.controls.password.hasError('required')">
+                    Password is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="form.controls.password.hasError('minlength')">
+                    Minimum password length is 8 characters
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <mat-label>Confirm password</mat-label>
+                <input type="password" matInput placeholder="" value="" formControlName="confirmPassword">
+                <mat-error *ngIf="form.controls.confirmPassword.hasError('required')">
+                    Password is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="form.controls.confirmPassword.hasError('minlength')">
+                    Minimum password length is 8 characters
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <mat-label>Full name</mat-label>
+                <input autocomplete="name" type="text" matInput placeholder="" value="" formControlName="fullName">
+                <mat-error *ngIf="form.controls.fullName.hasError('required')">
+                    Full name is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="form.controls.fullName.hasError('maxlength')">
+                    Full name max length is 100 characters
+                </mat-error>
+            </mat-form-field>
+
+            
+            <mat-error *ngIf="errorMessage">{{errorMessage}}</mat-error>
+            
+            <div class="footer">
+                <button [disabled]="!form.valid || showSpinner == true" type="submit" class="activate-button" mat-raised-button>Create account!</button>
+            <mat-spinner *ngIf="showSpinner == true" [diameter]="36"></mat-spinner>
+            </div>
+
+            
+            <br clear="both" />
+        </form>
+    </div>
+  </section>
+  

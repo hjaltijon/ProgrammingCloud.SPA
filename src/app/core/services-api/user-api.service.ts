@@ -36,6 +36,28 @@ export class UserApiService {
   }
 
 
+  async activateUser(user: User): Promise<User>{
+    const body =
+    {
+      email: user.email,
+      fullName: user.fullName,
+      password: user.password,
+      verifyEmailToken: user.verifyEmailToken
+    };
+    console.log(body);
+    try {
+      return await this._http.post<User>(
+        ENV.baseApiUrl + 'user/' + user.email + '/activate',
+        body,
+        {
+          headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
+        }
+      ).toPromise();
+    } catch (error) {
+      this.handleError(error);
+    }
+    return null;//never happens
+  }
 
 
 

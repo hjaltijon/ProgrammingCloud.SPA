@@ -1,0 +1,15 @@
+<mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="!loadingData">
+  <h2>Select problems to assign to classroom</h2>
+  <mat-selection-list #problemList>
+    <mat-list-option *ngFor="let problem of problems" [value]="problem.problemId">
+      {{problem.title}}
+    </mat-list-option>
+  </mat-selection-list>
+  
+  <!-- <p>
+    Options selected: {{problemList.selectedOptions.selected.length}}
+  </p> -->
+  <button (click)="assignProblems(problemList.selectedOptions.selected)" type="button" class="save-button" mat-raised-button color="primary">Assign problems!</button>
+</div>
+

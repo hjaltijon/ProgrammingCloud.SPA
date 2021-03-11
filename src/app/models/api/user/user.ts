@@ -5,4 +5,7 @@ export class User {
     fullName: string;
     createdDate: Date;
     actionAccessMappings: { [action: string]: number; }; //key: actionName, value: accessLevel
+
+    password: string;
+    verifyEmailToken: string;
 }

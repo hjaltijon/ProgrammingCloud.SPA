@@ -1,0 +1,10 @@
+<h3>Add student by email</h3>
+
+<mat-form-field>
+    <input type="email" matInput placeholder="example@example.com" value="" [formControl]="email">
+    <mat-error *ngIf="email.hasError('email') || email.hasError('required') || email.hasError('maxlength')">
+        Please enter a valid email address
+    </mat-error>
+</mat-form-field>
+
+<button (click)="addStudent()" [disabled]="!email.valid" type="button" class="save-button" mat-raised-button color="primary">Add student!</button>

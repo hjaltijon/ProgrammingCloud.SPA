@@ -19,7 +19,7 @@ export class ClassroomComponent implements OnInit {
 
   classroom: Classroom;
   loadingData: boolean = true;
-  enableStudentAndInviteTabs: boolean = false;
+  enableStudentTab: boolean = false;
   async ngOnInit(): Promise<void> {
     this.loadingData = true;
     let classroomId: number = +this._route.snapshot.paramMap.get('classroomId');
@@ -27,7 +27,7 @@ export class ClassroomComponent implements OnInit {
     let currentUser: User = this._sharedDataService.currentUser.value;
 
     if(currentUser.actionAccessMappings["GetClassroomUsers"] === 8 && this.classroom.teacherId === currentUser.userId){
-      this.enableStudentAndInviteTabs = true;
+      this.enableStudentTab = true;
     }
 
     this.loadingData = false;

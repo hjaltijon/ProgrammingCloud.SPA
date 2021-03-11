@@ -50,7 +50,30 @@
         <app-code-editor [compilerErrors]="teacherEditorCompilerErrors" [initialCode]="initialTestingCode" (codeChangedEvent)="updateTestCode($event)"></app-code-editor>
         <div>
             <h3>Test code</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex doloribus fuga consequatur cupiditate itaque rerum quidem neque sit fugiat quisquam molestiae obcaecati aut expedita, odit explicabo esse minus velit voluptatibus?</p>
+            <p>The code in this editor is supposed to test the student code and return a JSON string with the test result.</p>
+            <p>The system will call the function <strong>TeacherTestingFunction</strong> in the class <strong>TeacherTestingClass</strong> in the namespace <strong>TeacherTestingNameSpace</strong>. So do not change these names.</p>
+            <p>The system will expect the function to return a JSON string with the following format:</p>
+            <pre>
+<code ngNonBindable>[
+    &#123;
+        "Name":"some test name 1",
+        "Success":true,
+        "Expected":"8",
+        "Actual":"8",
+        "Input":"122",
+        "Message":"some message.. "
+    &#123;,
+    &#123;
+        "Name":"some test name 2",
+        "Success":false,
+        "Expected":"7",
+        "Actual":"6",
+        "Input":"120",
+        "Message":"some message..
+    &#123;
+]</code>
+            </pre>
+            
         </div>
     </div>
     <div class="footer">

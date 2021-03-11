@@ -14,11 +14,18 @@ import { ProblemSolvingComponent } from './classroom/classroom-problems/problem-
 import { CodeEditorModule } from 'src/app/shared/code-editor/code-editor.module';
 import { MatButtonModule } from '@angular/material/button';
 import { ClassroomStudentsComponent } from './classroom/classroom-students/classroom-students.component';
-import { ClassroomInvitesComponent } from './classroom/classroom-invites/classroom-invites.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClassroomAddStudentModalComponent } from './classroom/classroom-students/classroom-add-student-modal/classroom-add-student-modal.component';
+import { ClassroomAddProblemsModalComponent } from './classroom/classroom-problems/classroom-add-problems-modal/classroom-add-problems-modal.component';
+import { MatListModule } from '@angular/material/list';
+import { ClassroomsCreateClassroomModalComponent } from './classrooms-create-classroom-modal/classrooms-create-classroom-modal.component';
 
 
 @NgModule({
-  declarations: [ClassroomsComponent, ClassroomComponent, ClassroomProblemsComponent, ProblemSolvingComponent, ClassroomStudentsComponent, ClassroomInvitesComponent],
+  declarations: [ClassroomsComponent, ClassroomComponent, ClassroomProblemsComponent, ProblemSolvingComponent, ClassroomStudentsComponent, ClassroomAddStudentModalComponent, ClassroomAddProblemsModalComponent, ClassroomsCreateClassroomModalComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -48,7 +55,13 @@ import { ClassroomInvitesComponent } from './classroom/classroom-invites/classro
     MatTabsModule,
     DragDropModule,
     CodeEditorModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatListModule
   ]
 })
 export class ClassroomsModule { }

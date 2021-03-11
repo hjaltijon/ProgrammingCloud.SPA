@@ -3,6 +3,8 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ProblemApiService } from 'src/app/core/services-api/problem-api.service';
 import { ActivatedRoute } from '@angular/router';
 import { Problem } from 'src/app/models/api/problem/problem';
+import { MatDialog } from '@angular/material/dialog';
+import { ClassroomAddProblemsModalComponent } from './classroom-add-problems-modal/classroom-add-problems-modal.component';
 
 @Component({
   selector: 'app-classroom-problems',
@@ -13,7 +15,8 @@ export class ClassroomProblemsComponent implements OnInit {
 
   constructor(
     private _problemApiService: ProblemApiService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    public _dialog: MatDialog
     ) { }
 
   problems: Problem[];
@@ -29,23 +32,36 @@ export class ClassroomProblemsComponent implements OnInit {
 
 
 
-  movies = [
-    'Episode I - The Phantom Menace',
-    'Episode II - Attack of the Clones',
-    'Episode III - Revenge of the Sith',
-    'Episode IV - A New Hope',
-    'Episode V - The Empire Strikes Back',
-    'Episode VI - Return of the Jedi',
-    'Episode VII - The Force Awakens',
-    'Episode VIII - The Last Jedi',
-    'Episode IX – The Rise of Skywalker'
-  ];
-
   drop(event: CdkDragDrop<string[]>) {
     //moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
     moveItemInArray(this.problems, event.previousIndex, event.currentIndex);
     console.log(event);
-    console.log(this.movies);
+  }
+
+  async addProblems(problemIds: number[]){
+    this.loadingData = true;
+    if(problemIds && problemIds.length > 0){
+      let promises: Promise<void>[] = [];
+      for (const problemId of problemIds) {
+        promises.push(this._problemApiService.createProblemClassroomRelation(this.classroomId, problemId))
+      }
+      await Promise.all(promises);
+      this.problems = await this._problemApiService.getClassroomProblems(this.classroomId);
+    }
+    this.loadingData = false;
+  }
+
+
+  openDialog(): void {
+    const dialogRef = this._dialog.open(ClassroomAddProblemsModalComponent, {
+      width: '580px',
+      //data: {name: this.name, animal: this.animal}
+      data: {classroomProblems: this.problems}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.addProblems(result);
+    });
   }
 
 }

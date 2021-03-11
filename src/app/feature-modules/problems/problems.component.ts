@@ -13,7 +13,8 @@ export class ProblemsComponent implements OnInit {
 
   constructor(
     private _sharedDataService: SharedDataService,
-    private _problemApiService: ProblemApiService ) { }
+    private _problemApiService: ProblemApiService ) 
+  { }
 
 
   problems: Problem[];
