@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Problem } from 'src/app/models/api/problem/problem';
 import { MatDialog } from '@angular/material/dialog';
 import { ClassroomAddProblemsModalComponent } from './classroom-add-problems-modal/classroom-add-problems-modal.component';
+import { SharedDataService } from 'src/app/core/services/shared-data.service';
+import { User } from 'src/app/models/api/user/user';
 
 @Component({
   selector: 'app-classroom-problems',
@@ -16,17 +18,24 @@ export class ClassroomProblemsComponent implements OnInit {
   constructor(
     private _problemApiService: ProblemApiService,
     private _route: ActivatedRoute,
-    public _dialog: MatDialog
+    public _dialog: MatDialog,
+    private _sharedDataService: SharedDataService
     ) { }
 
   problems: Problem[];
   loadingData: boolean = true;
   classroomId: number = null;
+  showAssignButton: boolean = false;
   async ngOnInit(): Promise<void> {
     this.loadingData = true;
     let classroomId: number = parseInt(this._route.snapshot.paramMap.get('classroomId'));
     this.classroomId = classroomId;
     this.problems = await this._problemApiService.getClassroomProblems(classroomId);
+    let currentUser: User = this._sharedDataService.currentUser.value;
+    if(currentUser.actionAccessMappings["CreateProblemClassroomRelation"] === 8){
+      this.showAssignButton = true;
+    }
+
     this.loadingData = false;
   }
 

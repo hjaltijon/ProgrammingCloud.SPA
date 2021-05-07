@@ -33,6 +33,7 @@ export class SessionService {
     localStorage.setItem("access_token", accessToken);
     localStorage.setItem("current_user", JSON.stringify(currentUser));
     this._sharedDataService.currentUser.next(currentUser);
+
     //this.setLogoutTimer(accessToken);
     return true;
   }

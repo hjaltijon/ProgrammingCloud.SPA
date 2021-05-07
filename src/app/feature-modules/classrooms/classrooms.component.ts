@@ -24,11 +24,18 @@ export class ClassroomsComponent implements OnInit {
   displayedColumns: string[] = ['title', 'teacherName', 'date'];
   currentUserId: number = null;
   loadingData: boolean = true;
+  showCreateButton: boolean = false;
   async ngOnInit(): Promise<void> {
     //console.log(this._sharedDataService.currentUser.value);
     this.loadingData = true;
-    this.currentUserId = this._sharedDataService.currentUser.value.userId;
+    let currentUser: User = this._sharedDataService.currentUser.value;
+    this.currentUserId = currentUser.userId;
     this.classrooms = await this._classroomApiService.getClassrooms(this.currentUserId);
+
+    if(currentUser.actionAccessMappings["CreateClassroom"] === 8){
+      this.showCreateButton = true;
+    }
+
     this.loadingData = false;
   }
 

@@ -21,6 +21,7 @@ export class ProblemsComponent implements OnInit {
   displayedColumns: string[] = ['title', 'date'];
 
   loadingData: boolean = true;
+  showCreateButton = false;
   async ngOnInit(): Promise<void> {
     //console.log(this._sharedDataService.currentUser.value);
     this.loadingData = true;

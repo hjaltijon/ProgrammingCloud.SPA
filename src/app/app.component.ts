@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { SessionService } from './core/services/session.service';
 import { SharedDataService } from './core/services/shared-data.service';
 import { User } from './models/api/user/user';
@@ -32,16 +33,27 @@ export class AppComponent implements OnInit {
   });
   }
 
+  
+
   enableProblemsTab = false;
+  currentUserSubscription: Subscription;
   ngOnInit(){
-    let currentUser: User = this._sharedDataService.currentUser.value;
-    if(currentUser.actionAccessMappings["GetProblems"] === 8){
-      this.enableProblemsTab = true;
-    }
+    this.currentUserSubscription = this._sharedDataService.currentUser.subscribe((currentUser: User) => {
+      console.log(currentUser);
+      console.log(this.enableProblemsTab);
+      if(currentUser?.actionAccessMappings["GetProblems"] === 8){
+        this.enableProblemsTab = true;
+      }
+      else{
+        this.enableProblemsTab = false;
+      }
+    });
   }
 
   
-  
+  ngOnDestroy() {
+    this.currentUserSubscription.unsubscribe();
+  }
 
   logout(){
     this._sessionService.logout();

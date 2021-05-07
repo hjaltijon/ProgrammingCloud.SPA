@@ -8,7 +8,10 @@
         <a mat-tab-link 
             routerLink="/classrooms"
             [active]="currentPage == '/classrooms'"> Classrooms </a>
-        <a [disabled]="!enableProblemsTab" mat-tab-link 
+        <!-- <a [disabled]="!enableProblemsTab" mat-tab-link 
+            routerLink="/problems"
+            [active]="currentPage == '/problems'"> Problems </a> -->
+        <a *ngIf="enableProblemsTab" mat-tab-link 
             routerLink="/problems"
             [active]="currentPage == '/problems'"> Problems </a>
         <a mat-tab-link 

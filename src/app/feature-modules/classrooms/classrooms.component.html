@@ -1,6 +1,6 @@
 <section class="inner-container">
     <h2>My Classrooms</h2>
-    <button (click)="openDialog()" type="button" mat-stroked-button color="primary">Create new classroom</button>
+    <button *ngIf="showCreateButton" (click)="openDialog()" type="button" mat-stroked-button color="primary">Create new classroom</button>
     <mat-progress-bar *ngIf="loadingData" mode="indeterminate"></mat-progress-bar>
     <table *ngIf="!loadingData" mat-table [dataSource]="classrooms" class="mat-elevation-z8">
 
